@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <style>
+        table {
+            padding-top: 100px;
+        }
+
+        table tr td,
+        th {
+            border: 2px solid #000;
+            padding: 10px;
+        }
+    </style>
+
+
+    <form name="myForm" onsubmit="return forminput()">
+
+        <label>First Name</label>
+        <input type="text" name="fname" placeholder="First Name"> </br></br>
+
+        <label>Last Name</label>
+        <input type="text" name="lname" placeholder="Last Name"></br></br>
+
+        <label>contact</label>
+        <input type="tel" name="contact" placeholder="+// 123 (4567) 890"></br></br>
+
+        <h4>Please select your Gender</h4>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male"> Male </label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label></br></br>
+
+        <label>Email</label>
+        <input type="email" name="email" placeholder="123@gmail.com"></br>
+
+        </br> <input type="submit" value="Submit">
+
+    </form>
+    <table id="onlymale">
+        <th>Name Male</th>
+        <th>Gender </th>
+    </table>
+
+    <table id="onlyfemale">
+        <th>Name Female</th>
+        <th>Gender</th>
+    </table>
+
+    <table id="datainc">
+        <tr>
+            <th>Name</th>
+            <th>contact</th>
+            <th>Email</th>
+            <th>Gender</th>
+        </tr>
+
+    </table>
+
+</body>
+
+</html>
+
+<script>
+
+    function forminput() {
+
+        const firstna = document.forms["myForm"]["fname"].value
+        const lastna = document.forms["myForm"]["lname"].value
+        const phone = document.forms["myForm"]["contact"].value
+        const gmail = document.forms["myForm"]["email"].value
+
+        let gender = document.forms["myForm"]["gender"].value
+
+        if (gender == "male") {
+            console.log("male")
+        }
+
+
+
+        try {
+            if (firstna === "") throw "Enter your First Name";
+            if (!isNaN(firstna)) throw "Enter valid First Name";
+            if (firstna.length < 3 || firstna.length > 20) throw "Enter only 3 to 20 character First Name";
+
+            if (lastna === "") throw "Enter your Last Name";
+            if (!isNaN(lastna)) throw "Enter valid Last Name";
+            if (lastna.length < 3 || lastna.length > 20) throw "Enter onlny 3 to 20 character Last Name";
+
+            if (isNaN(phone)) throw "Enter only yor number .... \n valid number ";
+            if (phone.length < 10 || phone.length > 10) throw "Enter valide number (1 to 10 digit )";
+
+            document.forms["myForm"].reset();
+
+
+        } catch (error) {
+            alert(error);
+            console.log(error);
+
+            return false;
+        }
+
+        console.log(phone);
+        let mix = firstna.concat(lastna);
+
+        var name = mix
+        var phone1 = phone
+        var gmail1 = gmail
+        var gender1 = gender
+
+        var table = document.getElementById("datainc");
+        var newRow = table.insertRow(-1);
+
+        var nameCell = newRow.insertCell(0);
+        var phCell = newRow.insertCell(1);
+        var gmCell = newRow.insertCell(2);
+        var genderCell = newRow.insertCell(3);
+
+       nameCell.innerHTML = name;
+        phCell.innerHTML = phone1;
+        gmCell.innerHTML = gmail1;
+        genderCell.innerHTML = gender1;
+
+        function filtermale() {
+
+            var table1 = document.getElementById("onlymale");
+            var newRow = table1.insertRow(-1);
+
+            var maleNameCell = newRow.insertCell(0);
+            var maleCell = newRow.insertCell(1);
+
+            try {
+                if(gender == "male") {
+                maleNameCell.innerHTML = name;
+                maleCell.innerHTML = gender;
+            } throw "it is not female" ;
+            } catch (error) {
+            } 
+        }
+        filtermale()
+
+        function filterfemale() {
+
+            var table2 = document.getElementById("onlyfemale");
+            var newRow = table2.insertRow(-1);
+
+            var femaleNameCell = newRow.insertCell(0);
+            var femaleCell = newRow.insertCell(1);
+
+            try {
+                if (gender !== "female") {
+                femaleNameCell.innerHTML = name;
+                femaleCell.innerHTML = gender;
+            } throw "it is not male" ;
+            } catch (error) {
+            } 
+        }
+        filterfemale()
+        return false;
+
+    }
+
+
+
+
+</script>
