@@ -32,9 +32,9 @@
         <input type="tel" name="contact" placeholder="+// 123 (4567) 890"></br></br>
 
         <h4>Please select your Gender</h4>
-        <input type="radio" id="male" name="gender" value="male">
+        <input type="radio" id="male" name="gender" value="male" required>
         <label for="male"> Male </label>
-        <input type="radio" id="female" name="gender" value="female">
+        <input type="radio" id="female" name="gender" value="female" required>
         <label for="female">Female</label></br></br>
 
         <label>Email</label>
@@ -139,7 +139,7 @@
                 if(gender == "male") {
                 maleNameCell.innerHTML = name;
                 maleCell.innerHTML = gender;
-            }  
+            } throw "it is not female" ;
             } catch (error) {
             } 
         }
@@ -154,10 +154,10 @@
             var femaleCell = newRow.insertCell(1);
 
             try {
-                if (gender !== "female") {
+                if (gender == "female") {
                 femaleNameCell.innerHTML = name;
                 femaleCell.innerHTML = gender;
-            }  
+            } throw "it is not male" ;
             } catch (error) {
             } 
         }
